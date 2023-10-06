@@ -25,7 +25,7 @@ Access tooltips and code actions from inlay hints.
 
 ## API Quickstart
 
-See `:h inlay_plus` for a full API reference.
+See `:h interactive-inlay` for a full API reference.
 
 ```lua
 require("interactive-inlay").inlay_tooltip_at_cursor_word()
@@ -43,8 +43,10 @@ require("interactive-inlay").inlay_tooltip_at_cursor_word()
 Currently the plugin just `vim.print`s the inlay hints (see `:messages`). Next, we need to:
 
 - [ ] Less bad detection of parameter inlay hints (maybe requires `inlay_tooltip_at_cursor_dwim`). But parameter tooltips are quite useless, so maybe this case isn't important.
-- [ ] Make the tooltip floating window. Is it better to show a combined tooltip or cycle through the label parts' tooltips? Leave it open to a config option?
+- [x] tooltip floating window MVP
+- [ ] combined hover/tooltip (or is it better to cycle through the label parts' tooltips? leave it open to a config option?)
 - [ ] Add a select menu to "click" on the label parts (how do we get there? press H twice? or separate hotkey?)
-- [ ] Add inlay hint code actions to the code actions list (maybe a null-ls source?). Or maybe don't do this and just add this to the select menu?
+- [ ] Add inlay hint commands to the code actions list (maybe a null-ls source?). Or maybe don't do this and just add this to the select menu?
 - [ ] In VSCode there seem to be CodeLens inside the inlay hint tooltip, which is too giga-brain for me right now
+- [ ] Navigation between inlay hints (e.g. "]i", "[i", Telescope)
 - [ ] Mouse support?
