@@ -1,0 +1,32 @@
+name: ci
+
+permissions: {}
+
+on:
+  push:
+    branches:
+      - main
+  pull_request: ~
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.sha }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    name: CI
+    runs-on: ubuntu-22.04
+    permissions:
+      packages: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: JohnnyMorganz/stylua-action@762d02aa393cd7c7f196feb932d16db1e5c5aa77
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          args: --color always --check lua
+          version: 0.18.2
+      - uses: NTBBloodbath/selene-action@68d1ed05cd53716aa8b9b3b81f8b63462949fab6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          args: lua
+          version: 0.25.0

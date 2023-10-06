@@ -14,7 +14,7 @@ end
 
 --- @param range lsp.Range
 M.inlay_tooltip_at_range = function(range)
-  local hint = vim.lsp.inlay_hint.get({ range = range })[1]
+  local hint = vim.lsp.inlay_hint.get({ bufnr = 0, range = range })[1]
   if not hint then
     return
   end
@@ -28,28 +28,24 @@ M.inlay_tooltip_at_range = function(range)
     methods.inlayHint_resolve,
     hint.inlay_hint,
     --- @param inlay_hint lsp.InlayHint
-    function (_, inlay_hint)
+    function(_, inlay_hint)
       -- TODO: also add inlay_hint.tooltip
       -- TODO: also add inlay_hint.label[].tooltip
       -- TODO: also show some stuff about what textEdits/commands/lenses are available
       local label = inlay_hint.label
       if type(label) == "table" then
-        local parts = vim.tbl_filter(
-          function(part) return part.location ~= nil end,
-          label
-        )
+        local parts = vim.tbl_filter(function(part)
+          return part.location ~= nil
+        end, label)
         -- TODO: merge all hovers
         local part = parts[1]
         if part then
           vim.print(part.location)
           -- FIXME: for some reason this enters the floating window
-          client.request(
-            methods.textDocument_hover,
-            {
-              textDocument = { uri = part.location.uri },
-              position = part.location.range.start,
-            }
-          )
+          client.request(methods.textDocument_hover, {
+            textDocument = { uri = part.location.uri },
+            position = part.location.range.start,
+          })
         end
       end
     end,

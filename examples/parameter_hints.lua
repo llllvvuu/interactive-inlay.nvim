@@ -1,4 +1,3 @@
-local function fizz(foo, bar, baz)
-end
+local function fizz(foo, bar, baz) end
 
 fizz("foo", "bar", "baz")
