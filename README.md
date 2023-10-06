@@ -2,6 +2,8 @@
 
 Access tooltips and code actions from inlay hints.
 
+<img width="1508" alt="Screenshot 2023-10-06 at 3 54 57 AM" src="https://github.com/llllvvuu/interactive-inlay.nvim/assets/5601392/92f9b5d0-04b2-4209-bbba-02d66c15d586">
+
 ## Installation
 
 ### [lazy.nvim](https://github.com/folke/lazy.nvim)
