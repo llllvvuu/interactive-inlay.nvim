@@ -47,8 +47,7 @@ Currently the plugin just `vim.print`s the inlay hints (see `:messages`). Next, 
 - [ ] Less bad detection of parameter inlay hints (maybe requires `inlay_tooltip_at_cursor_dwim`). But parameter tooltips are quite useless, so maybe this case isn't important.
 - [x] tooltip floating window MVP
 - [ ] combined hover/tooltip (or is it better to cycle through the label parts' tooltips? leave it open to a config option?)
-- [ ] Add a select menu to "click" on the label parts (how do we get there? press H twice? or separate hotkey?)
-- [ ] Add inlay hint commands to the code actions list (maybe a null-ls source?). Or maybe don't do this and just add this to the select menu?
-- [ ] In VSCode there seem to be CodeLens inside the inlay hint tooltip, which is too giga-brain for me right now
-- [ ] Navigation between inlay hints (e.g. "]i", "[i", Telescope)
+- [ ] Add a select menu to "click" on the label parts. Probably do like rust-tools.nvim, H twice to enter, first N lines are `<Enter>`-able. Maybe also, if not combined tooltip, then when cursor goes over each part it opens that part's tooltips/hovers
+- [ ] Add `textEdits` and label part `command`s to the code actions list (maybe a null-ls source?). Or maybe don't do this and just add this to the select menu?
+- [ ] Navigation between inlay hints (e.g. "]i", "[i", leap.nvim, Telescope)
 - [ ] Mouse support?
