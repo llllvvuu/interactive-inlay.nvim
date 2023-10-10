@@ -7,8 +7,10 @@ local function word_range()
   local start_line, start_col = unpack(vim.fn.searchpos("\\<", "bcnW"))
   local end_line, end_col = unpack(vim.fn.searchpos("\\>", "cnW"))
   return {
-    start = { start_line - 1, start_col - 1 },
-    ["end"] = { end_line - 1, end_col },
+    -- vim is 1-indexed, lsp is 0-indexed
+    -- HACK: add one character to the beginning in case the inlay hint is placed before the word
+    start = { line = start_line - 1, character = start_col - 1 },
+    ["end"] = { line = end_line - 1, character = end_col },
   }
 end
 
@@ -40,7 +42,6 @@ M.inlay_tooltip_at_range = function(range)
         -- TODO: merge all hovers
         local part = parts[1]
         if part then
-          vim.print(part.location)
           -- FIXME: for some reason this enters the floating window
           client.request(methods.textDocument_hover, {
             textDocument = { uri = part.location.uri },
