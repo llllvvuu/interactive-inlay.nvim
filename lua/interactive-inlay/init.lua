@@ -34,6 +34,7 @@ M.inlay_tooltip_at_range = function(range)
       -- TODO: also add inlay_hint.tooltip
       -- TODO: also add inlay_hint.label[].tooltip
       -- TODO: also show some stuff about what textEdits/commands/lenses are available
+      if not inlay_hint then return end
       local label = inlay_hint.label
       if type(label) == "table" then
         local parts = vim.tbl_filter(function(part)
